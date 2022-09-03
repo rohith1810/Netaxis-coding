@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flames App</title>
+</head>
+<style>
+  body{
+    background: #4568DC;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #B06AB3, #4568DC);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #B06AB3, #4568DC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+ 
+  }
+  input{
+    width: 250px;
+    height: 35px;
+
+  }
+  button{
+    width: 100px;
+    height: 50px;
+    margin-top: 50px;
+  }
+</style>
+<body>
+    <div id="btn">
+        <div style="text-align:center; margin-top: 10%">
+            <h1>CONNECT WITH YOUR LOVE</h1>
+        <div>
+            <label >Your name:</label>
+            <input type="text" id="text1" placeholder="your name">
+
+            <label >Your crush name:</label>
+            <input type="text" id="text2" placeholder="your crush name">
+        </div>
+        <button onClick="btnclick()">CLICK ME</button>
+        </div>
+    </div>    
+
+<script>
+   
+function btnclick(){
+    
+    var fName = document.getElementById("text1").value;
+    var lName = document.getElementById("text2").value;
+    var count=0;
+for (var i = 0; i < fName.length; i++) {
+    for (var j = 0; j < lName.length; j++) {
+        if (fName[i] == lName[j]) {
+        count++;
+        break;
+        }
+    }
+}
+var newcount = count*2;
+ var bothname = fName.length + lName.length;
+var totalCount = bothname - newcount;
+console.log(totalCount);
+if(totalCount==1 || totalCount==13 || totalCount==19){
+    var newdiv = document.createElement("div");
+    newdiv.style.cssText="color:red;font-size:100px;text-align:center;background:green;"
+    newdiv.innerText = 'sister';
+    btn.append(newdiv);
+}else if(totalCount==2 || totalCount == 4 || totalCount == 7 || totalCount == 9 || totalCount==20){
+    var newdiv = document.createElement("div");
+     newdiv.style.cssText="color:red;font-size:100px;text-align:center;background:green;"
+    newdiv.innerText = 'Enemy';
+    btn.append(newdiv);
+}else if(totalCount==3 || totalCount ==5  || totalCount==14 || totalCount==16 || totalCount==18){
+    var newdiv = document.createElement("div");
+     newdiv.style.cssText="color:red;font-size:100px;text-align:center;background:green;"
+    newdiv.innerText = 'Friends';
+    btn.append(newdiv);
+
+}
+else if(totalCount==6  || totalCount==11  || totalCount == 15 ){
+    var newdiv = document.createElement("div");
+     newdiv.style.cssText="color:red;font-size:100px;text-align:center;background:green;"
+    newdiv.innerText = 'Marriage';
+    btn.append(newdiv);
+}
+else if(totalCount==8 || totalCount==17 || totalCount==12){
+    var newdiv = document.createElement("div");
+     newdiv.style.cssText="color:red;font-size:100px;text-align:center;background:green;"
+    newdiv.innerText = 'Affection';
+    btn.append(newdiv);
+}
+else if(totalCount==10){
+    var newdiv = document.createElement("div");
+     newdiv.style.cssText="color:red;font-size:100px;text-align:center;background:green;"
+    newdiv.innerText = 'Love';
+    btn.append(newdiv);
+}
+else if(totalCount==0){
+    var newdiv = document.createElement("div");
+     newdiv.style.cssText="color:red;font-size:100px;text-align:center;background:green;"
+    newdiv.innerText = 'nothing to say';
+    btn.append(newdiv);
+}
+
+
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/511de46b15.js" crossorigin="anonymous"></script>
+    <title>JQuery_Assesment</title>
+    <style>
+        .first
+        {
+            border: 2px solid #aa00ff;
+        }
+        #alert
+        {
+            color: rgb(255, 191, 0);
+        }
+
+        #enter
+        {
+            width: 44%;
+        }
+        #date
+        {
+            width: 44%;
+        }
+
+        .dis
+        {
+            display: none;
+        }
+        body,.bgnavbar{
+            
+            background: linear-gradient(to right, #00ff77,	#00c8ff94);
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-light bgnavbar">
+            <a class="navbar-brand" href="#"> To do list creating :-</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <button class="btn" id="addnew"><i class="fa-solid fa-plus"></i></button>
+                </li>
+                <li class="nav-item">
+                  <button class="btn"><i class="fa-solid fa-rotate"></i></button>
+                </li>
+                <li class="nav-item">
+                  <button class="btn" id="searchbar"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </li>
+              </ul>
+            </div>
+          </nav>
+    </div>
+    <div class="container mt-5">
+        <div id="input1">
+            <form class="form-inline justify-content-center">
+                <input class="form-control mr-2" type="text" id="enter" placeholder="What to do ?">
+                <input class="form-control" type="date" id="date">
+                <button class="btn" id="add"><i class="fa-solid fa-check"></i></button>
+                <button class="btn" id="erase"><i class="fa-solid fa-eraser"></i></button>
+            </form>
+            <p id="alert" class="text-center"></p>
+        </div>
+
+        <div id="input2" class="dis">
+            <form class="form-inline justify-content-center">
+                <input class="form-control w-100" type="text" id="search">
+            </form>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-lg-12 first">
+                <h1 class="text-center"> Listing  To Do</h1>
+                <table id="list" class="mx-auto text-center">
+                    
+                </table>
+            </div>
+        </div>
+        <div class="row mt-2 justify-content-between">
+            <div class="col-lg-5 first">
+                <h1 class="text-center"><i class="fa-solid fa-check"></i> Completed To Do</h1>
+                <table id="complite" class="mx-auto text-center">
+
+                </table>
+            </div>
+            <div class="col-lg-5 first">
+                <h1 class="text-center"><i class="fa-regular fa-clock"></i> Old To Do list</h1>
+                <table id="old" class="mx-auto text-center">
+
+                </table>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-lg-12 first">
+                <h1 class="text-center"><i class="fa-solid fa-battery-full"></i>Percentage of your completion</h1>
+                <p class="text-center">You have completed <span id="percent">0</span>%</p>
+            </div>
+        </div>
+    </div>
+
+   <script>
+    
+var d = new Date();
+var month = d.getMonth()+1;
+var day = d.getDate();
+var output = d.getFullYear() + '-' +
+    (month<10 ? '0' : '') + month + '-' +
+    (day<10 ? '0' : '') + day;
+
+var firstarr = [];
+var secondarr = [];
+
+
+$("#add").click(function(){
+    var enter = $("#enter").val();
+    var date = $("#date").val();
+    if(enter.length == 0 && date.length == 0)
+    {
+        $("#alert").append("Enter the field");
+        console.log(date.length);
+    }
+    else
+    {
+        var li1 = enter+"-"+date
+        $("#list").append("<tr class='select'><td>"+enter+"</td><td>"+"-"+date+"</td></tr>");
+        console.log(date.length);
+        var enter = $("#enter").val("");
+        var date = $("#date").val("");
+        $("#alert").text("")
+        firstarr.push(li1);
+    }
+});
+
+$("#erase").click(function(){
+    var enter = $("#enter");
+    var date = $("#date");
+    enter.val("");
+    date.val("");
+});
+
+$("#list").on("click","tr",function(){
+    var com = $(this).text();
+    $("#complite").append("<tr><td>"+com+"</td></tr>");
+    secondarr.push(com);
+    $("#percent").text("");
+    prog();
+});
+
+$("#complite").on("click","tr",function(){
+    $(this).remove();
+});
+
+$("#searchbar").click(function(){
+    $("#input1").addClass("dis");
+    $("#input2").removeClass("dis");
+});
+$("#addnew").click(function(){
+    $("#input1").removeClass("dis");
+    $("#input2").addClass("dis");
+});
+
+function prog()
+{
+    var a = firstarr.length;
+    var b = secondarr.length;
+    var percent = b / a * 100;
+    $("#percent").append(percent);
+}
+   </script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npercent8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+</body>
+</html>
